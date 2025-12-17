@@ -24,7 +24,7 @@ function Navigation() {
         <div className="flex justify-between items-center h-14">
           <Link to="/" className="flex items-center space-x-2">
             <picture>
-              <img src="/public/logo.png" alt="logo" className="h-8 w-8 object-contain" />
+              <img src="/logo.png" alt="logo" className="h-8 w-8 object-contain" />
             </picture>
             <span className="text-h2 font-family-slab font-medium">
               <span className="text-fg">News</span>
