@@ -20,7 +20,7 @@ function ProfilePage() {
             setUserName(parsed.name);
             return;
           }
-          if (parsed.user_metatdata?.name) {
+          if (parsed.user_metadata?.name) {
             setUserName(parsed.user_metadata.name);
             return;
           }
