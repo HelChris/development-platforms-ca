@@ -2,7 +2,7 @@ import Header from "../components/ui/Header";
 import Footer from "../components/ui/Footer";
 import NewsFeed from "../components/ui/Newsfeed";
 
-// single post page
+// single post page when user clicks an article
 function PostPage() {
   return (
     <div className="min-h-screen flex flex-col">

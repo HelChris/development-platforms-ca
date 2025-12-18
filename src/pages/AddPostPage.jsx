@@ -3,6 +3,9 @@ import Footer from "../components/ui/Footer";
 import NewsFeed from "../components/ui/Newsfeed";
 
 // add post page
+
+// convert to addPost component and import that to profile page instead
+
 function AddPostPage() {
   return (
     <div className="min-h-screen flex flex-col">

@@ -40,6 +40,16 @@ function Navigation() {
             >
               News
             </Link>
+
+            {user && (
+              <Link
+                to="/profile"
+                className="text-body text-fg font-medium font-family-slab capitalize hover:text-pop transition-colors"
+              >
+                Profile
+              </Link>
+            )}
+
             {user ? (
               <button
                 onClick={handleLogout}
@@ -57,7 +67,7 @@ function Navigation() {
             )}
           </div>
 
-          {/* mobile nav */}
+          {/* mobile nav toggle*/}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-md text-fg hover:text-pop focus:outline-none focus:ring-2 focus:ring-pop"
@@ -96,6 +106,17 @@ function Navigation() {
             >
               News
             </Link>
+
+            {user && (
+              <Link
+                to="/profile"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-fg hover:text-pop font-medium py-2"
+              >
+                Profile
+              </Link>
+            )}
+
             {user ? (
               <button
                 onClick={handleLogout}

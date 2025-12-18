@@ -18,12 +18,10 @@ export const authService = {
     return user;
   },
 
-  //logout user
   logout() {
     localStorage.removeItem(AUTH_KEY);
   },
 
-  //get current user
   getUser() {
     const user = localStorage.getItem(AUTH_KEY);
     return user ? JSON.parse(user) : null;

@@ -8,13 +8,12 @@ function Home() {
       <header>
         <Header />
       </header>
-      <main className="min-h-screen bg-secondary p-8">
-        <h1 className="text-fg text-h1 font-family-slab font-black max-w-3xl m-auto text-center">
-          HOMEPAGE
-        </h1>
-        <NewsFeed />
+      <main className="">
+        <div className="bg-bg">
+          <NewsFeed />
+        </div>
       </main>
-      <footer className="mx-auto w-full text-center">
+      <footer className="w-full text-center">
         <Footer />
       </footer>
     </div>
