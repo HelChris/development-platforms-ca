@@ -46,7 +46,9 @@ function ProfilePage() {
       </header>
       <main className=" bg-secondary p-2">
         <div className="h-screen bg-bg/90">
-          <h1 className="text-fg text-h1 text-center   p-8">Welcome, {userName}!</h1>
+          <h1 className="text-fg text-h1 text-center   p-8 underline decoration-pop underline-offset-4 decoration-2">
+            Welcome, {userName}!
+          </h1>
         </div>
       </main>
       <footer className="mx-auto w-full text-center">
