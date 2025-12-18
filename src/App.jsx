@@ -7,8 +7,6 @@ import PostPage from "./pages/PostPage.jsx";
 import AddPostPage from "./pages/AddPostPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 
-// ..
-
 function App() {
   return (
     <Router>
