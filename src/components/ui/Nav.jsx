@@ -53,14 +53,14 @@ function Navigation() {
             {user ? (
               <button
                 onClick={handleLogout}
-                className="bg-pop text-fg hover:text-bg px-4 py-2 rounded-md font-medium transition-colors"
+                className="bg-pop text-fg hover:bg-pop/50 px-4 py-2 rounded-md font-medium transition-colors"
               >
                 Logout
               </button>
             ) : (
               <button
                 onClick={handleLogin}
-                className="bg-pop text-fg hover:text-bg px-4 py-2 rounded-md font-medium transition-colors"
+                className="bg-pop text-fg hover:bg-pop/50 px-4 py-2 rounded-md font-medium transition-colors"
               >
                 Login
               </button>
@@ -97,8 +97,8 @@ function Navigation() {
 
       {/* dropdown menu*/}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-pop/50">
-          <div className="px-4 py-3 space-y-3">
+        <div className="md:hidden border-t border-pop/50 relative">
+          <div className="px-4 py-3 space-y-3 ">
             <Link
               to="/"
               onClick={() => setIsMobileMenuOpen(false)}
@@ -133,6 +133,10 @@ function Navigation() {
               </button>
             )}
           </div>
+          <div
+            className="absolute bottom-o left-0 w-full h-0.5 bg-pop/50 pointer-events-none"
+            aria-hidden="true"
+          />
         </div>
       )}
     </nav>

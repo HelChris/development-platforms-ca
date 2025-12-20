@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "../components/ui/Header";
 import Footer from "../components/ui/Footer";
 import { supabase } from "../supabase";
+import NewsFeed from "../components/ui/Newsfeed";
 
 // profile page
 // import components: write post, edit post, delete post
@@ -44,11 +45,12 @@ function ProfilePage() {
       <header>
         <Header />
       </header>
-      <main className=" bg-secondary p-2">
-        <div className="h-screen bg-bg/90">
-          <h1 className="text-fg text-h1 text-center   p-8 underline decoration-pop underline-offset-4 decoration-2">
+      <main className="grow bg-secondary p-2 overflow-auto">
+        <div className="max-w-4xl mx-auto w-full bg-bg/90 rounded-md min-h-0">
+          <h1 className="text-fg text-h1 text-center p-8 underline decoration-pop underline-offset-4 decoration-2">
             Welcome, {userName}!
           </h1>
+          <NewsFeed showWriteForm={true} />
         </div>
       </main>
       <footer className="mx-auto w-full text-center">

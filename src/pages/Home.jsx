@@ -1,6 +1,6 @@
 import Header from "../components/ui/Header";
 import Footer from "../components/ui/Footer";
-import NewsFeed from "../components/ui/Newsfeed";
+import PostsList from "../components/ui/PostsList";
 
 function Home() {
   return (
@@ -8,12 +8,12 @@ function Home() {
       <header>
         <Header />
       </header>
-      <main className="">
-        <div className="bg-bg">
-          <NewsFeed />
+      <main className="grow bg-bg">
+        <div className="min-h-full">
+          <PostsList limit={5} showActions={false} />
         </div>
       </main>
-      <footer className="w-full text-center">
+      <footer className="w-full text-center mt-auto">
         <Footer />
       </footer>
     </div>
