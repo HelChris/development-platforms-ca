@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "../../supabase";
 import { Link } from "react-router-dom";
 import PostCard from "./PostCard";
@@ -9,20 +9,16 @@ function PostsList({ limit = null, showActions = false }) {
   const [error, setError] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(() => {
-    loadPosts();
-    getCurrentUser();
-  }, [limit]);
-
-  const getCurrentUser = async () => {
+  const getCurrentUser = useCallback(async () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
     setCurrentUser(user);
-  };
+  }, []);
 
-  const loadPosts = async () => {
+  const loadPosts = useCallback(async () => {
     try {
+      setLoading(true);
       let query = supabase.from("posts").select("*").order("created_at", { ascending: false });
 
       if (limit) {
@@ -40,7 +36,12 @@ function PostsList({ limit = null, showActions = false }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [limit]);
+
+  useEffect(() => {
+    loadPosts();
+    getCurrentUser();
+  }, [loadPosts, getCurrentUser]);
 
   const handleDelete = async (postId) => {
     if (!window.confirm("Are you sure you want to delete this article?")) {
