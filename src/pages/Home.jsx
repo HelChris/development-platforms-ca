@@ -10,7 +10,7 @@ function Home() {
       </header>
       <main className="grow bg-bg">
         <div className="min-h-full">
-          <PostsList limit={5} showActions={false} />
+          <PostsList showActions={false} />
         </div>
       </main>
       <footer className="w-full text-center mt-auto">

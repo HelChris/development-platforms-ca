@@ -6,8 +6,12 @@ import PostCard from "./PostCard";
 function PostsList({ limit = null, showActions = false }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
+  const [offset, setOffset] = useState(0);
+  const pageSize = limit || 9;
+  const [hasMore, setHasMore] = useState(true);
 
   const getCurrentUser = useCallback(async () => {
     const {
@@ -16,30 +20,46 @@ function PostsList({ limit = null, showActions = false }) {
     setCurrentUser(user);
   }, []);
 
-  const loadPosts = useCallback(async () => {
-    try {
-      setLoading(true);
-      let query = supabase.from("posts").select("*").order("created_at", { ascending: false });
+  const loadPosts = useCallback(
+    async (currentOffset, append = false) => {
+      try {
+        if (append) setLoadingMore(true);
+        else setLoading(true);
 
-      if (limit) {
-        query = query.limit(limit);
+        const from = currentOffset;
+        const to = from + pageSize - 1;
+
+        let query = supabase
+          .from("posts")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .range(from, to);
+
+        const { data, error } = await query;
+
+        if (error) throw error;
+
+        if (append) {
+          setPosts((prev) => [...prev, ...(data || [])]);
+        } else {
+          setPosts(data || []);
+        }
+
+        setHasMore(!!data && data.length === pageSize);
+        setOffset(currentOffset + pageSize);
+      } catch (err) {
+        console.error("Error loading posts:", err);
+        setError("Failed to load articles");
+      } finally {
+        setLoading(false);
+        setLoadingMore(false);
       }
-
-      const { data, error } = await query;
-
-      if (error) throw error;
-
-      setPosts(data || []);
-    } catch (err) {
-      console.error("Error loading posts:", err);
-      setError("Failed to load articles");
-    } finally {
-      setLoading(false);
-    }
-  }, [limit]);
+    },
+    [pageSize]
+  );
 
   useEffect(() => {
-    loadPosts();
+    loadPosts(0, false);
     getCurrentUser();
   }, [loadPosts, getCurrentUser]);
 
@@ -57,14 +77,19 @@ function PostsList({ limit = null, showActions = false }) {
 
       if (error) throw error;
 
-      loadPosts();
+      loadPosts(0, false);
     } catch (err) {
       console.error("Error deleting post:", err);
       alert("Failed to delete article");
     }
   };
 
-  if (loading) {
+  const handleLoadMore = () => {
+    if (!hasMore || loadingMore) return;
+    loadPosts(offset, true);
+  };
+
+  if (loading && posts.length === 0) {
     return (
       <div className="flex justify-center items-center py-8">
         <div className="text-fg/50">Loading articles...</div>
@@ -99,6 +124,23 @@ function PostsList({ limit = null, showActions = false }) {
           />
         ))}
       </div>
+
+      {/* Load more */}
+      {!limit && (
+        <div className="flex justify-center mt-8">
+          {hasMore ? (
+            <button
+              onClick={handleLoadMore}
+              disabled={loadingMore}
+              className="px-4 py-2 rounded-md bg-pop text-fg hover:bg-pop/80 disabled:opacity-60"
+            >
+              {loadingMore ? "Loading..." : "Load More"}
+            </button>
+          ) : (
+            <div className="text-fg/60">No more articles</div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
