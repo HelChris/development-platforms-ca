@@ -1,20 +1,23 @@
-import Header from "./components/ui/Header";
-import Feed from "./sections/home/Feed";
-import Newsletter from "./sections/home/Newsletter";
-import Contact from "./sections/home/Contact";
-import Footer from "./components/ui/Footer";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage.jsx";
+import PostPage from "./pages/PostPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import EditPostPage from "./pages/EditPostPage.jsx";
 
 function App() {
   return (
-    <>
-      <main>
-        <Header />
-        <Feed />
-        <Newsletter />
-        <Contact />
-      </main>
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/post/:id" element={<PostPage />} />
+        <Route path="/edit-post/:id" element={<EditPostPage />} />
+      </Routes>
+    </Router>
   );
 }
 

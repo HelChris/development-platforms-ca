@@ -1,7 +1,9 @@
+import Nav from "./Nav";
+
 function Header() {
   return (
     <header>
-      <nav></nav>
+      <Nav />
     </header>
   );
 }

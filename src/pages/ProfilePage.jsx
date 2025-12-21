@@ -1,0 +1,63 @@
+import { useState, useEffect } from "react";
+import Header from "../components/ui/Header";
+import Footer from "../components/ui/Footer";
+import { supabase } from "../supabase";
+import NewsFeed from "../components/ui/Newsfeed";
+
+// profile page
+// import components: write post, edit post, delete post
+// import sections: publish new post (with form) | your posts (with option to edit/delete posts)
+
+function ProfilePage() {
+  const [userName, setUserName] = useState("User");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const stored = localStorage.getItem("user");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed.name) {
+            setUserName(parsed.name);
+            return;
+          }
+          if (parsed.user_metadata?.name) {
+            setUserName(parsed.user_metadata.name);
+            return;
+          }
+        }
+
+        const { data, error } = await supabase.auth.getUser();
+        if (!error && data?.user) {
+          const name = data.user.user_metadata?.name || data.user.email?.split("@")[0] || "User";
+          setUserName(name);
+        }
+      } catch (err) {
+        console.error("Profile fetch error:", err);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <header>
+        <Header />
+      </header>
+      <main className="grow bg-secondary p-2 overflow-auto">
+        <div className="max-w-4xl mx-auto w-full bg-bg/90 rounded-md min-h-0">
+          <h1 className="text-fg text-h1 text-center p-8 underline decoration-pop underline-offset-4 decoration-2">
+            Welcome, {userName}!
+          </h1>
+          <NewsFeed showWriteForm={true} />
+        </div>
+      </main>
+      <footer className="mx-auto w-full text-center">
+        <Footer />
+      </footer>
+    </div>
+  );
+}
+
+export default ProfilePage;
