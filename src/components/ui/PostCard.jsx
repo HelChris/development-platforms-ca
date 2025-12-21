@@ -69,7 +69,7 @@ function PostCard({ post, showActions = false, onDelete }) {
 
         {/* Headline */}
         <Link to={`/post/${post.id}`}>
-          <h2 className="text-2xl font-bold text-fg mb-2 hover:text-pop transition-colors">
+          <h2 className="text-2xl font-bold text-fg mb-2 hover:text-pop transition-colors max-w-fit text-balance">
             {post.title}
           </h2>
         </Link>
