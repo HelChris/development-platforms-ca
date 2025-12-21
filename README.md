@@ -1,10 +1,79 @@
-# Newsplattform
+# Development Platforms
 
-// ## name of platform
+_-"NewsFlow" a news platform built with supabase, Vite, Tailwind 4 and React._
 
-### Development platforms CA
+---
 
-// installation and config info, how to run project
+## Installation
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn package manager
+- A supabase account
+
+### Steps
+
+1. **Clone the repository:**
+
+```sh
+git clone <repo-url>
+cd <your-project-folder>
+```
+
+2. **Install dependencies:**
+
+```sh
+npm install
+```
+
+3. **Set up environment variables:**
+
+- Create a `.env` file in the root directory
+- Add your Supabase credentials:
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+4. **Start the development server:**
+
+```sh
+npm run dev
+```
+
+- the application will be available at `http://localhost:5173`
+
+5. **(Optional) Buil for production:**
+
+```sh
+npm run build
+```
+
+### Development
+
+The project uses the following tools:
+
+- **Vite** - Fast build tool and dev server
+- **React** - UI library
+- **Tailwind CSS** - Utility-first CSS framework
+- **Supabase** - Backend as a Service (Authentuication & Database)
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **Husky** - Git hooks for commit linting
+
+To format code:
+
+```sh
+npm run format
+```
+
+To lint code:
+
+```sh
+npm run lint
+```
 
 ---
 
